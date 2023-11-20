@@ -2,28 +2,28 @@
 {
     public class Current
     {
-        public int last_updated_epoch { get; set; }
-        public string last_updated { get; set; }
-        public int temp_c { get; set; }
-        public double temp_f { get; set; }
-        public int is_day { get; set; }
-        public Condition condition { get; set; }
-        public double wind_mph { get; set; }
-        public double wind_kph { get; set; }
-        public int wind_degree { get; set; }
-        public string wind_dir { get; set; }
-        public int pressure_mb { get; set; }
-        public double pressure_in { get; set; }
-        public int precip_mm { get; set; }
-        public int precip_in { get; set; }
-        public int humidity { get; set; }
-        public int cloud { get; set; }
-        public double feelslike_c { get; set; }
-        public double feelslike_f { get; set; }
-        public int vis_km { get; set; }
-        public int vis_miles { get; set; }
-        public int uv { get; set; }
-        public double gust_mph { get; set; }
-        public double gust_kph { get; set; }
+        public long LastUpdatedEpoch { get; set; }
+        public string LastUpdated { get; set; }
+        public decimal TempC { get; set; }
+        public decimal TempF { get; set; }
+        public int IsDay { get; set; }
+        public Condition Condition { get; set; }
+        public decimal WindMph { get; set; }
+        public decimal WindKph { get; set; }
+        public int WindDegree { get; set; }
+        public string WindDir { get; set; }
+        public decimal PressureMb { get; set; }
+        public decimal PressureIn { get; set; }
+        public decimal PrecipMm { get; set; }
+        public decimal PrecipIn { get; set; }
+        public int Humidity { get; set; }
+        public int Cloud { get; set; }
+        public decimal FeelslikeC { get; set; }
+        public decimal FeelslikeF { get; set; }
+        public decimal VisKm { get; set; }
+        public decimal VisMiles { get; set; }
+        public decimal Uv { get; set; }
+        public decimal GustMph { get; set; }
+        public decimal GustKph { get; set; }
     }
 }

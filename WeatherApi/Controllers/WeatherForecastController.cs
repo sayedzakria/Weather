@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using WeatherApi.Models;
 
 namespace WeatherApi.Controllers
@@ -36,15 +37,18 @@ namespace WeatherApi.Controllers
         }
 
         //Get Current city weather
-        [HttpGet(Name = "GetCurrent?city={city}&lang={lang}")]
+        [HttpGet( "GetCurrent")]
         public async Task<IActionResult> GetCurrentAsync(string city, string lang)
         {
-            string apiUrl = $"https://api.weatherapi.com/v1/current.json?{city}=London&lang={lang}&key=" + apiKey;
+            string apiUrl = $"https://api.weatherapi.com/v1/current.json?q={city}&lang={lang}&key=" + apiKey;
 
             using (HttpClient client = _httpClientFactory.CreateClient())
             {
                 try
                 {
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                   
+
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
                     CurrentWeather currentWeather = new CurrentWeather();
                     if (response.IsSuccessStatusCode)
@@ -55,6 +59,9 @@ namespace WeatherApi.Controllers
                     }
                     else
                     {
+                        // Log the response details for debugging purposes
+                        string errorMessage = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine($"Error Response: {errorMessage}");
                         return StatusCode((int)response.StatusCode, $"Error: {response.ReasonPhrase}");
                     }
                 }
