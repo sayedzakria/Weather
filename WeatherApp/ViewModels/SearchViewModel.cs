@@ -1,5 +1,6 @@
 ﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace WeatherApp.ViewModels
     {
         public AsyncCommand SearchCityCommand { get; }
         IInternetWeather internetWeatherService;
-        public AsyncCommand<Models.Location> SelectedCommand { get; }
+        public AsyncCommand SelectedCommand { get; }
         List<Models.Location> _cites;
         public List<Models.Location> Cites
         {
@@ -36,7 +37,7 @@ namespace WeatherApp.ViewModels
             Title = "Search";
             SearchCityCommand = new AsyncCommand(SearchCity);
             internetWeatherService = DependencyService.Get<IInternetWeather>();
-            SelectedCommand = new AsyncCommand<Models.Location>(SelectedAsync);
+            SelectedCommand = new AsyncCommand(SelectedAsync);
         }
 
         Models.Location selectedCity;
@@ -45,25 +46,24 @@ namespace WeatherApp.ViewModels
             get => selectedCity;
             set => SetProperty(ref selectedCity, value);
         }
-       private async Task SelectedAsync(Models.Location e)
+       private async Task SelectedAsync()
         {
             
             if (SelectedCity == null)
                 return;
 
-            SelectedCity = null;
+            MessagingCenter.Send<object>(this, "ChangeTabHome");
 
-
-            await AppShell.Current.GoToAsync(nameof(Home));
-            //await Application.Current.MainPage.DisplayAlert("Selected", coffee.Name, "OK");
+            MessagingCenter.Send(this, "DataMessage", SelectedCity);
 
         }
         async Task SearchCity()
         {
-            IsBusy=true;
+
+            IsBusy = true;
             Cites = await internetWeatherService.GetSearchCityWeather(City);
-            IsBusy=false;
+            IsBusy = false;
         }
 
-        }
+    }
 }

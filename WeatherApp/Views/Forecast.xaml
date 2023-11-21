@@ -1,12 +1,80 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WeatherApp.Views.Forecast"
-             Title="Forecast">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="WeatherApp.Views.Forecast" 
+             xmlns:viewmodels="clr-namespace:WeatherApp.ViewModels"
+              Style="{StaticResource CustomPageStyle}"
+             
+             >
+    <ContentPage.BindingContext>
+        <viewmodels:ForcastViewModel/>
+    </ContentPage.BindingContext>
+    <Grid Padding="20" RowDefinitions="Auto,Auto,15,Auto">
+
+
+        <Label Grid.Row="0" Text="{Binding Allforcast.location.Name}" Style="{StaticResource Headline}" />
+        <Label Grid.Row="1"  Text="{Binding Allforcast.current.TempC, StringFormat='{0}°'}" Style="{StaticResource subtitle}" />
+
+
+
+
+
+        <Frame Grid.Row="3" 
+    Padding="10"
+    BackgroundColor="{StaticResource Primary}"
+            BorderColor="{StaticResource Secondary}"
+            CornerRadius="20"
+    HasShadow="True"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="Start">
+            <VerticalStackLayout>
+                <HorizontalStackLayout Spacing="20" HorizontalOptions="FillAndExpand">
+                   
+                    <Label Text="Daily Forecast" Style="{StaticResource subtitle}" HorizontalOptions="EndAndExpand" />
+                </HorizontalStackLayout>
+                <BoxView  
+    Color="{StaticResource Grayline}"
+    HeightRequest="1"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="CenterAndExpand"/>
+                <BoxView HeightRequest="10" BackgroundColor="Transparent"/>
+                <HorizontalStackLayout>
+                    <Frame Padding="10" BackgroundColor="{StaticResource Secondary}"
+         BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
+                        <VerticalStackLayout>
+                            <Label Text="12 AM" Style="{StaticResource smallewhite}"/>
+                            <Image Source="moonmidrain.png"   Aspect="AspectFit" />
+                            <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
+                            <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
+                        </VerticalStackLayout>
+
+                    </Frame>
+                    <Frame Padding="10" BackgroundColor="{StaticResource Tertiary}"
+BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
+                        <VerticalStackLayout>
+                            <Label Text="Now" Style="{StaticResource smallewhite}"/>
+                            <Image Source="moonmidrain.png"   Aspect="AspectFit" />
+                            <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
+                            <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
+                        </VerticalStackLayout>
+
+                    </Frame>
+                    <Frame Padding="10" BackgroundColor="{StaticResource Secondary}"
+BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
+                        <VerticalStackLayout>
+                            <Label Text="12 AM" Style="{StaticResource smallewhite}"/>
+                            <Image Source="moonmidrain.png"   Aspect="AspectFit" />
+                            <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
+                            <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
+                        </VerticalStackLayout>
+
+                    </Frame>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+
+        </Frame>
+
+    </Grid>
+
 </ContentPage>

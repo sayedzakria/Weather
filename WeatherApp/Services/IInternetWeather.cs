@@ -11,5 +11,7 @@ namespace WeatherApp.Services
     {
         Task<CurrentWeather> GetCurrentWeather(string city,string lang);
         Task<List<Models.Location>> GetSearchCityWeather(string city);
+        Task<AllForcast> GetForcastWeather(string city,string days);
+        
     }
 }

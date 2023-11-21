@@ -1,7 +1,9 @@
-﻿using MvvmHelpers;
+﻿using AndroidX.Lifecycle;
+using MvvmHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using WeatherApp.Models;
@@ -20,12 +22,26 @@ namespace WeatherApp.ViewModels
         }
         ICurrentWeather currentWeatherService;
         IInternetWeather internetWeatherService;
+
+        Models.Location selectedCity;
+        public Models.Location SelectedCity
+        {
+            get => selectedCity;
+            set => SetProperty(ref selectedCity, value);
+        }
         public HomeViewModel()
         {
             Title = "Home";
             currentWeatherService = DependencyService.Get<ICurrentWeather>();
             internetWeatherService = DependencyService.Get<IInternetWeather>();
-           // initdatabase();
+            // Retrieve the data when the SecondViewModel is constructed
+        MessagingCenter.Subscribe<SearchViewModel, Models.Location>(this, "DataMessage", (sender, data) =>
+        {
+            selectedCity = data;
+            
+            initdatabase();
+        });
+             initdatabase();
         }
 
         async void initdatabase()
@@ -36,7 +52,8 @@ namespace WeatherApp.ViewModels
                 {
 
                     //Call online Api
-                    string city = Preferences.Get(nameof(city), "London");
+
+                    string city = Preferences.Get(nameof(city), "tanta");
                     CurrentWeather = await internetWeatherService.GetCurrentWeather(city, "en");
                     if (CurrentWeather == null)
                     {

@@ -1,10 +1,19 @@
-namespace WeatherApp.Views;
+using Newtonsoft.Json;
+using System.Web;
 
-public partial class Home : ContentPage
+namespace WeatherApp.Views
 {
-	public Home()
-	{
-		InitializeComponent();
-	}
-	
+    public partial class Home : ContentPage
+    {
+        public Home()
+        {
+            InitializeComponent();
+            MessagingCenter.Subscribe<object>(this, "ChangeTabHome", (sender) =>
+            {
+                Shell.Current.CurrentItem = this;
+            });
+        }
+
+        
+    }
 }

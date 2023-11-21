@@ -7,22 +7,51 @@
      xmlns:views="clr-namespace:WeatherApp.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="WeatherApp"
-   
-       
+     
+      
            >
-    
-    <TabBar>
-        <Tab Title="Home"
-            Icon="home.png">
-            <ShellContent ContentTemplate="{DataTemplate views:Home}" />
+    <Shell.TabBarBackgroundColor>
+        <OnPlatform x:TypeArguments="Color">
+            <On Platform="Android" Value="{StaticResource Secondary}" />
+            <On Platform="iOS" Value="{StaticResource Secondary}" />
+            <!-- Add additional platforms if needed -->
+        </OnPlatform>
+    </Shell.TabBarBackgroundColor>
+    <Shell.TabBarForegroundColor>
+        <OnPlatform x:TypeArguments="Color">
+            <On Platform="Android" Value="{StaticResource White}" />
+            <On Platform="iOS" Value="{StaticResource White}" />
+            <!-- Add additional platforms if needed -->
+        </OnPlatform>
+    </Shell.TabBarForegroundColor>
+    <Shell.TabBarUnselectedColor>
+        <OnPlatform x:TypeArguments="Color">
+            <On Platform="Android" Value="{StaticResource Primary}" />
+            <On Platform="iOS" Value="{StaticResource Primary}" />
+            <!-- Add additional platforms if needed -->
+        </OnPlatform>
+    </Shell.TabBarUnselectedColor>
+    <Shell.TabBarTitleColor>
+        <OnPlatform x:TypeArguments="Color">
+            <On Platform="Android" Value="{StaticResource White}" />
+            <On Platform="iOS" Value="{StaticResource White}" />
+            <!-- Add additional platforms if needed -->
+        </OnPlatform>
+    </Shell.TabBarTitleColor>
+    <TabBar >
+        <Tab  Icon="home.png" Title="Home">
+            <ShellContent  
+            Route="Home" ContentTemplate="{DataTemplate views:Home}" />
         </Tab>
-        <Tab Title="Search" 
-            Icon="add.png">
-            <ShellContent ContentTemplate="{DataTemplate views:Search}" />
+
+
+        <Tab   Icon="add.png" Title="Search">
+            <ShellContent  
+            Icon="add.png" Route="Search" ContentTemplate="{DataTemplate views:Search}" />
         </Tab>
-        <Tab Title="Forecast "
-     Icon="map.png">
-            <ShellContent ContentTemplate="{DataTemplate views:Forecast}" />
+        <Tab  Icon="map.png" Title="Forecast">
+                <ShellContent  
+     Icon="map.png" Route="Forecast" ContentTemplate="{DataTemplate views:Forecast}" />
         </Tab>
     </TabBar>
    

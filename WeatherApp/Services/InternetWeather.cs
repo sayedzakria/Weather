@@ -77,5 +77,30 @@ namespace WeatherApp.Services
                 throw ex;
             }
         }
+
+
+       public  async Task<AllForcast> GetForcastWeather(string city, string dayes)
+        {
+            var json = string.Empty;
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    json = await client.GetStringAsync($"/WeatherForecast/GetForcast?city={city}&days={dayes}");
+                }
+
+                // Deserialize JSON response
+                return JsonConvert.DeserializeObject<AllForcast>(json);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                // Handle exceptions
+                throw ex;
+            }
+        }
+
+     
     }
 }

@@ -110,5 +110,41 @@ namespace WeatherApi.Controllers
                 }
             }
         }
+
+        //Get Forcast weather
+        [HttpGet("GetForcast")]
+        public async Task<IActionResult> GetForcast(string city,string days)
+        {
+            string apiUrl = $"https://api.weatherapi.com/v1/forecast.json?q={city}&days={days}&key=" + _apiKey;
+
+            using (HttpClient client = _httpClientFactory.CreateClient())
+            {
+                try
+                {
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+                    AllForcast allForcast = new AllForcast();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonResult = await response.Content.ReadAsStringAsync();
+                        allForcast = JsonConvert.DeserializeObject<AllForcast>(jsonResult) ?? new AllForcast();
+                        return StatusCode(200, allForcast);
+                    }
+                    else
+                    {
+                        // Log the response details for debugging purposes
+                        string errorMessage = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine($"Error Response: {errorMessage}");
+                        return StatusCode((int)response.StatusCode, $"Error: {response.ReasonPhrase}");
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    return StatusCode(500, $"Error: {ex.Message}");
+                }
+            }
+        }
     }
 }

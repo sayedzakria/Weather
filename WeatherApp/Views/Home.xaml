@@ -29,9 +29,9 @@
     HorizontalOptions="FillAndExpand"
     VerticalOptions="EndAndExpand">
             <VerticalStackLayout>
-                <HorizontalStackLayout Spacing="20" HorizontalOptions="FillAndExpand">
-                    <Label Text="Hourly Forecast" Style="{StaticResource subtitle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="Weekly Forecast" Style="{StaticResource subtitle}" HorizontalOptions="EndAndExpand" />
+                <HorizontalStackLayout Margin="5" Spacing="20" HorizontalOptions="FillAndExpand">
+                    <Label Text="Daily Forecast" Style="{StaticResource subtitle}" HorizontalOptions="StartAndExpand" />
+                    
                 </HorizontalStackLayout>
                 <BoxView  
     Color="{StaticResource Grayline}"
@@ -40,34 +40,54 @@
     VerticalOptions="CenterAndExpand"/>
                 <BoxView HeightRequest="10" BackgroundColor="Transparent"/>
                 <HorizontalStackLayout>
-                <Frame Padding="10" BackgroundColor="{StaticResource Secondary}"
+                <Frame Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Secondary}"
          BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                    <VerticalStackLayout>
-                        <Label Text="12 AM" Style="{StaticResource smallewhite}"/>
-                        <Image Source="moonmidrain.png"   Aspect="AspectFit" />
-                        <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
-                        <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
-                    </VerticalStackLayout>
+                        <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
+                        <Label Grid.Row="0" Text="12 AM" Style="{StaticResource smallewhite}"/>
+                            <Image  Grid.Row="2" Source="moonmidrain.png"   Aspect="AspectFit" />
+                            <Label  Grid.Row="4" Text="30 %" Style="{StaticResource smalleBlue}"/>
+                            <Label  Grid.Row="6" Text="19°" Style="{StaticResource subtitlewhite}"/>
+                    </Grid>
                     
                 </Frame>
-                    <Frame Padding="10" BackgroundColor="{StaticResource Tertiary}"
+                    <Frame Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Tertiary}"
 BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                    <VerticalStackLayout>
-                        <Label Text="Now" Style="{StaticResource smallewhite}"/>
-                        <Image Source="moonmidrain.png"   Aspect="AspectFit" />
-                        <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
-                        <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
-                    </VerticalStackLayout>
+                        <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
+                            <Label Grid.Row="0" Text="12 AM" Style="{StaticResource smallewhite}"/>
+                            <Image  Grid.Row="2" Source="moonmidrain.png"   Aspect="AspectFit" />
+                            <Label  Grid.Row="4" Text="30 %" Style="{StaticResource smalleBlue}"/>
+                            <Label  Grid.Row="6" Text="19°" Style="{StaticResource subtitlewhite}"/>
+                        </Grid>
 
-                </Frame>
-                    <Frame Padding="10" BackgroundColor="{StaticResource Secondary}"
+                    </Frame>
+                    <Frame Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Secondary}"
 BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                        <VerticalStackLayout>
-                            <Label Text="12 AM" Style="{StaticResource smallewhite}"/>
-                            <Image Source="moonmidrain.png"   Aspect="AspectFit" />
-                            <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
-                            <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
-                        </VerticalStackLayout>
+                        <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
+                            <Label Grid.Row="0" Text="12 AM" Style="{StaticResource smallewhite}"/>
+                            <Image  Grid.Row="2" Source="moonmidrain.png"   Aspect="AspectFit" />
+                            <Label  Grid.Row="4" Text="30 %" Style="{StaticResource smalleBlue}"/>
+                            <Label  Grid.Row="6" Text="19°" Style="{StaticResource subtitlewhite}"/>
+                        </Grid>
+
+                    </Frame>
+                    <Frame Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Secondary}"
+BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
+                        <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
+                            <Label Grid.Row="0" Text="12 AM" Style="{StaticResource smallewhite}"/>
+                            <Image  Grid.Row="2" Source="moonmidrain.png"   Aspect="AspectFit" />
+                            <Label  Grid.Row="4" Text="30 %" Style="{StaticResource smalleBlue}"/>
+                            <Label  Grid.Row="6" Text="19°" Style="{StaticResource subtitlewhite}"/>
+                        </Grid>
+
+                    </Frame>
+                    <Frame Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Secondary}"
+BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
+                        <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
+                            <Label Grid.Row="0" Text="12 AM" Style="{StaticResource smallewhite}"/>
+                            <Image  Grid.Row="2" Source="moonmidrain.png"   Aspect="AspectFit" />
+                            <Label  Grid.Row="4" Text="30 %" Style="{StaticResource smalleBlue}"/>
+                            <Label  Grid.Row="6" Text="19°" Style="{StaticResource subtitlewhite}"/>
+                        </Grid>
 
                     </Frame>
                 </HorizontalStackLayout>
