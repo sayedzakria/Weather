@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp", "WeatherApp.csproj", "{4E9D8314-F5E2-4170-ACFE-626ABAB05666}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApp", "WeatherApp.csproj", "{4E9D8314-F5E2-4170-ACFE-626ABAB05666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi", "..\WeatherApi\WeatherApi.csproj", "{6E4443A8-2F23-4FB8-A4EB-AA77DDF1A072}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi", "..\WeatherApi\WeatherApi.csproj", "{6E4443A8-2F23-4FB8-A4EB-AA77DDF1A072}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,5 +29,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF01A9A2-96D8-42F4-A269-0E96EC902651}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\SharedWeather\SharedWeather.projitems*{4e9d8314-f5e2-4170-acfe-626abab05666}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Views.Search"
+              xmlns:model="clr-namespace:WeatherApp.Models" 
+             xmlns:components="clr-namespace:WeatherApp.Components"
+             xmlns:viewmodels="clr-namespace:WeatherApp.ViewModels"
+            xmlns:behaviors="clr-namespace:WeatherApp.Helpers"
+             Style="{StaticResource CustomPageStyle}"
+              >
+    <ContentPage.BindingContext>
+        <viewmodels:SearchViewModel/>
+    </ContentPage.BindingContext>
+   
+    <VerticalStackLayout  HorizontalOptions="Center" Padding="20" >
+    <Label Text="Weather" Style="{StaticResource Headline}" />
+        <SearchBar SearchCommand="{Binding SearchCityCommand}" Text="{Binding City}"  />
+    <BoxView HeightRequest="15" BackgroundColor="Transparent"/>
+    <ListView ItemsSource="{Binding Cites}" 
+                  
+                
+                  
+                  BackgroundColor="Transparent"
+                  
+               SeparatorVisibility="None"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsBusy,Mode=OneWay}"
+                   
+                  CachingStrategy="RecycleElement"
+                  HasUnevenRows="True"
+              SelectedItem="{Binding SelectedCity}"
+          SelectionMode="Single" 
+              
+            >
+            <ListView.Behaviors>
+
+                <behaviors:EventToCommandBehavior Command="{Binding SelectedCommand}"
+                                                  EventName="ItemTapped"/>
+
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                
+                <DataTemplate x:DataType="model:Location">
+                <ViewCell>
+
+                    <components:CityItem/>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        
+    </ListView>
+    </VerticalStackLayout>
+</ContentPage>

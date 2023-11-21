@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Views.Home"
+              xmlns:viewmodels="clr-namespace:WeatherApp.ViewModels"
+            Style="{StaticResource CustomPageStyle}"
+               
+             >
+    <ContentPage.BindingContext>
+        <viewmodels:HomeViewModel/>
+    </ContentPage.BindingContext>
+    <Grid>
+        
+        <VerticalStackLayout Margin="20">
+            <Label Text="{Binding CurrentWeather.Location.Name}" Style="{StaticResource Headline}" />
+            <Label Text="{Binding CurrentWeather.Current.TempC, StringFormat='{0}°'}" Style="{StaticResource temperature}" />
+            <Label Text="{Binding CurrentWeather.Current.Condition.Text}" Style="{StaticResource subtitle}" />
+            <Label Text="H:24° L:18°" Style="{StaticResource subtitlewhite}" />
+            <Image Source="house.png" HeightRequest="280" Aspect="AspectFit" />
+        </VerticalStackLayout>
+
+
+        <Frame
+    Padding="10"
+    BackgroundColor="{StaticResource Primary}"
+            BorderColor="{StaticResource Secondary}"
+            CornerRadius="20"
+    HasShadow="True"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="EndAndExpand">
+            <VerticalStackLayout>
+                <HorizontalStackLayout Spacing="20" HorizontalOptions="FillAndExpand">
+                    <Label Text="Hourly Forecast" Style="{StaticResource subtitle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="Weekly Forecast" Style="{StaticResource subtitle}" HorizontalOptions="EndAndExpand" />
+                </HorizontalStackLayout>
+                <BoxView  
+    Color="{StaticResource Grayline}"
+    HeightRequest="1"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="CenterAndExpand"/>
+                <BoxView HeightRequest="10" BackgroundColor="Transparent"/>
+                <HorizontalStackLayout>
+                <Frame Padding="10" BackgroundColor="{StaticResource Secondary}"
+         BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
+                    <VerticalStackLayout>
+                        <Label Text="12 AM" Style="{StaticResource smallewhite}"/>
+                        <Image Source="moonmidrain.png"   Aspect="AspectFit" />
+                        <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
+                        <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
+                    </VerticalStackLayout>
+                    
+                </Frame>
+                    <Frame Padding="10" BackgroundColor="{StaticResource Tertiary}"
+BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
+                    <VerticalStackLayout>
+                        <Label Text="Now" Style="{StaticResource smallewhite}"/>
+                        <Image Source="moonmidrain.png"   Aspect="AspectFit" />
+                        <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
+                        <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
+                    </VerticalStackLayout>
+
+                </Frame>
+                    <Frame Padding="10" BackgroundColor="{StaticResource Secondary}"
+BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
+                        <VerticalStackLayout>
+                            <Label Text="12 AM" Style="{StaticResource smallewhite}"/>
+                            <Image Source="moonmidrain.png"   Aspect="AspectFit" />
+                            <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
+                            <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
+                        </VerticalStackLayout>
+
+                    </Frame>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+           
+            
+        </Frame>
+
+    </Grid>
+
+</ContentPage>

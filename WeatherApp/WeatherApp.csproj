@@ -38,6 +38,8 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -57,10 +59,47 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\SFPRODISPLAYBOLD.OTF" />
+	  <None Remove="Resources\Fonts\SFPRODISPLAYREGULAR.OTF" />
+	  <None Remove="Resources\Images\add.png" />
+	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\house.png" />
+	  <None Remove="Resources\Images\map.png" />
+	  <None Remove="Resources\Images\menu.png" />
+	  <None Remove="Resources\Images\moonclod.png" />
+	  <None Remove="Resources\Images\moonmidrain.png" />
+	  <None Remove="Resources\Images\rectangle.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.6" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
+		
 	</ItemGroup>
+
+	
+
+	<ItemGroup>
+	  <MauiXaml Update="Components\CityItem.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Forecast.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Home.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Search.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+ 
 
 </Project>

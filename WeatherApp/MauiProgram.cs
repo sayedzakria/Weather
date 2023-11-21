@@ -11,8 +11,8 @@ namespace WeatherApp
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("SFPRODISPLAYREGULAR.OTF", "SfprodisplatRegular");
+                    fonts.AddFont("SFPRODISPLAYBOLD.OTF", "SfprodisplatBold");
                 });
 
 #if DEBUG
