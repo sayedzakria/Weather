@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherApp.Views.Home"
+             xmlns:components="clr-namespace:WeatherApp.Components"
               xmlns:viewmodels="clr-namespace:WeatherApp.ViewModels"
             Style="{StaticResource CustomPageStyle}"
                
@@ -9,6 +10,9 @@
     <ContentPage.BindingContext>
         <viewmodels:HomeViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <viewmodels:ForcastViewModel x:Key="ForcastVM "/>
+    </ContentPage.Resources>
     <Grid>
         
         <VerticalStackLayout Margin="20">
@@ -20,80 +24,51 @@
         </VerticalStackLayout>
 
 
-        <Frame
-    Padding="10"
-    BackgroundColor="{StaticResource Primary}"
-            BorderColor="{StaticResource Secondary}"
-            CornerRadius="20"
-    HasShadow="True"
-    HorizontalOptions="FillAndExpand"
-    VerticalOptions="EndAndExpand">
+        <Frame Grid.Row="3" 
+Padding="10"
+BackgroundColor="{StaticResource Primary}"
+        BorderColor="{StaticResource Secondary}"
+        CornerRadius="20"
+HasShadow="True"
+HorizontalOptions="FillAndExpand"
+VerticalOptions="EndAndExpand">
             <VerticalStackLayout>
                 <HorizontalStackLayout Margin="5" Spacing="20" HorizontalOptions="FillAndExpand">
                     <Label Text="Daily Forecast" Style="{StaticResource subtitle}" HorizontalOptions="StartAndExpand" />
-                    
+
                 </HorizontalStackLayout>
                 <BoxView  
-    Color="{StaticResource Grayline}"
-    HeightRequest="1"
-    HorizontalOptions="FillAndExpand"
-    VerticalOptions="CenterAndExpand"/>
+Color="{StaticResource Grayline}"
+HeightRequest="1"
+HorizontalOptions="FillAndExpand"
+VerticalOptions="CenterAndExpand"/>
                 <BoxView HeightRequest="10" BackgroundColor="Transparent"/>
-                <HorizontalStackLayout>
-                <Frame Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Secondary}"
-         BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                        <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
-                        <Label Grid.Row="0" Text="12 AM" Style="{StaticResource smallewhite}"/>
-                            <Image  Grid.Row="2" Source="moonmidrain.png"   Aspect="AspectFit" />
-                            <Label  Grid.Row="4" Text="30 %" Style="{StaticResource smalleBlue}"/>
-                            <Label  Grid.Row="6" Text="19°" Style="{StaticResource subtitlewhite}"/>
-                    </Grid>
-                    
-                </Frame>
-                    <Frame Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Tertiary}"
-BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                        <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
-                            <Label Grid.Row="0" Text="12 AM" Style="{StaticResource smallewhite}"/>
-                            <Image  Grid.Row="2" Source="moonmidrain.png"   Aspect="AspectFit" />
-                            <Label  Grid.Row="4" Text="30 %" Style="{StaticResource smalleBlue}"/>
-                            <Label  Grid.Row="6" Text="19°" Style="{StaticResource subtitlewhite}"/>
-                        </Grid>
 
-                    </Frame>
-                    <Frame Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Secondary}"
-BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                        <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
-                            <Label Grid.Row="0" Text="12 AM" Style="{StaticResource smallewhite}"/>
-                            <Image  Grid.Row="2" Source="moonmidrain.png"   Aspect="AspectFit" />
-                            <Label  Grid.Row="4" Text="30 %" Style="{StaticResource smalleBlue}"/>
-                            <Label  Grid.Row="6" Text="19°" Style="{StaticResource subtitlewhite}"/>
-                        </Grid>
+                <CollectionView ItemsSource="{Binding Allforcast.forecast.forecastday,Source={StaticResource ForcastVM }}"  
+       
+          BackgroundColor="Transparent"
+          ItemsLayout="HorizontalList"
+     
+    >
 
-                    </Frame>
-                    <Frame Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Secondary}"
-BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                        <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
-                            <Label Grid.Row="0" Text="12 AM" Style="{StaticResource smallewhite}"/>
-                            <Image  Grid.Row="2" Source="moonmidrain.png"   Aspect="AspectFit" />
-                            <Label  Grid.Row="4" Text="30 %" Style="{StaticResource smalleBlue}"/>
-                            <Label  Grid.Row="6" Text="19°" Style="{StaticResource subtitlewhite}"/>
-                        </Grid>
+                    <CollectionView.ItemTemplate>
 
-                    </Frame>
-                    <Frame Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Secondary}"
-BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                        <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
-                            <Label Grid.Row="0" Text="12 AM" Style="{StaticResource smallewhite}"/>
-                            <Image  Grid.Row="2" Source="moonmidrain.png"   Aspect="AspectFit" />
-                            <Label  Grid.Row="4" Text="30 %" Style="{StaticResource smalleBlue}"/>
-                            <Label  Grid.Row="6" Text="19°" Style="{StaticResource subtitlewhite}"/>
-                        </Grid>
+                        <DataTemplate x:DataType="model:Forecastday">
 
-                    </Frame>
-                </HorizontalStackLayout>
+                            <components:ForcastItem/>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+
+                <BoxView HeightRequest="40" BackgroundColor="Transparent"/>
+               
+
             </VerticalStackLayout>
-           
-            
+
+
         </Frame>
 
     </Grid>

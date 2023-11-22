@@ -1,5 +1,4 @@
-﻿using AndroidX.Lifecycle;
-using MvvmHelpers;
+﻿using MvvmHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,30 +37,57 @@ namespace WeatherApp.ViewModels
         MessagingCenter.Subscribe<SearchViewModel, Models.Location>(this, "DataMessage", (sender, data) =>
         {
             selectedCity = data;
-            
-            initdatabase();
+
+            CallOnlieApi();
         });
              initdatabase();
         }
 
         async void initdatabase()
         {
-             
-                CurrentWeather = await currentWeatherService.GetCurrentWeather(1);
+             DateTime lastupdat= Preferences.Get("LastUpdate", DateTime.Now);
+           
+            
+                CurrentWeather = await currentWeatherService.GetCurrentWeather();
                 if (CurrentWeather == null)
                 {
+             await   CallOnlieApi();
 
-                    //Call online Api
 
-                    string city = Preferences.Get(nameof(city), "tanta");
-                    CurrentWeather = await internetWeatherService.GetCurrentWeather(city, "en");
-                    if (CurrentWeather == null)
-                    {
-                        //save to sqlite databse
-                        await currentWeatherService.AddCurrentWeather(CurrentWeather);
-                    }
                 }
-             
+                else
+                {
+                if (lastupdat != DateTime.Now)
+                {
+                    await CallOnlieApi();
+                }
+                CurrentWeather.Location = await currentWeatherService.GetLocation(CurrentWeather.LocationId);
+                    CurrentWeather.Current = await currentWeatherService.GetCurrent(CurrentWeather.CurrentId);
+
+                }
+            
+        }
+
+        async Task CallOnlieApi()
+        {
+            //Call online Api
+
+            string city = Preferences.Get("city", "tanta");
+            CurrentWeather = await internetWeatherService.GetCurrentWeather(city, "en");
+            if (CurrentWeather != null)
+            {
+                //save to sqlite databse
+                int locationId = await currentWeatherService.AddLocation(CurrentWeather.Location);
+                int conditionId = await currentWeatherService.AddCondition(CurrentWeather.Current.Condition);
+                CurrentWeather.Current.ConditionId = conditionId;
+                int currentId = await currentWeatherService.AddCurrent(CurrentWeather.Current);
+
+                CurrentWeather.LocationId = locationId;
+                CurrentWeather.CurrentId = currentId;
+
+                await currentWeatherService.AddCurrentWeather(CurrentWeather);
+                Preferences.Set("LastUpdate", DateTime.Now);
+            }
         }
     }
 }

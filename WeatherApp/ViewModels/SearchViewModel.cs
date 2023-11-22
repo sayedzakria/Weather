@@ -51,7 +51,7 @@ namespace WeatherApp.ViewModels
             
             if (SelectedCity == null)
                 return;
-
+            Preferences.Set("city",selectedCity.Name);
             MessagingCenter.Send<object>(this, "ChangeTabHome");
 
             MessagingCenter.Send(this, "DataMessage", SelectedCity);

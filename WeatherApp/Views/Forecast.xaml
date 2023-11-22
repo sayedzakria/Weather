@@ -4,11 +4,16 @@
              x:Class="WeatherApp.Views.Forecast" 
              xmlns:viewmodels="clr-namespace:WeatherApp.ViewModels"
               Style="{StaticResource CustomPageStyle}"
-             
+              xmlns:components="clr-namespace:WeatherApp.Components"
+             xmlns:helper="clr-namespace:WeatherApp.Helper"
+             xmlns:model="clr-namespace:WeatherApp.Models" 
              >
     <ContentPage.BindingContext>
         <viewmodels:ForcastViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <helper:DateEqualityConverter x:Key="DateEqualityConverter" />
+    </ContentPage.Resources>
     <Grid Padding="20" RowDefinitions="Auto,Auto,15,Auto">
 
 
@@ -19,18 +24,18 @@
 
 
 
-        <Frame Grid.Row="3" 
+        <Frame Grid.Row="3"
     Padding="10"
     BackgroundColor="{StaticResource Primary}"
             BorderColor="{StaticResource Secondary}"
             CornerRadius="20"
     HasShadow="True"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="Start">
+    VerticalOptions="EndAndExpand">
             <VerticalStackLayout>
-                <HorizontalStackLayout Spacing="20" HorizontalOptions="FillAndExpand">
-                   
-                    <Label Text="Daily Forecast" Style="{StaticResource subtitle}" HorizontalOptions="EndAndExpand" />
+                <HorizontalStackLayout Margin="5" Spacing="20" HorizontalOptions="FillAndExpand">
+                    <Label Text="Daily Forecast" Style="{StaticResource subtitle}" HorizontalOptions="StartAndExpand" />
+
                 </HorizontalStackLayout>
                 <BoxView  
     Color="{StaticResource Grayline}"
@@ -38,38 +43,59 @@
     HorizontalOptions="FillAndExpand"
     VerticalOptions="CenterAndExpand"/>
                 <BoxView HeightRequest="10" BackgroundColor="Transparent"/>
-                <HorizontalStackLayout>
-                    <Frame Padding="10" BackgroundColor="{StaticResource Secondary}"
-         BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                        <VerticalStackLayout>
-                            <Label Text="12 AM" Style="{StaticResource smallewhite}"/>
-                            <Image Source="moonmidrain.png"   Aspect="AspectFit" />
-                            <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
-                            <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
-                        </VerticalStackLayout>
+                
+                    <CollectionView ItemsSource="{Binding Allforcast.forecast.forecastday}" 
+           
+              BackgroundColor="Transparent"
+              ItemsLayout="HorizontalList"
+         
+        >
 
-                    </Frame>
-                    <Frame Padding="10" BackgroundColor="{StaticResource Tertiary}"
-BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                        <VerticalStackLayout>
-                            <Label Text="Now" Style="{StaticResource smallewhite}"/>
-                            <Image Source="moonmidrain.png"   Aspect="AspectFit" />
-                            <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
-                            <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
-                        </VerticalStackLayout>
+                    <CollectionView.ItemTemplate>
 
-                    </Frame>
-                    <Frame Padding="10" BackgroundColor="{StaticResource Secondary}"
-BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
-                        <VerticalStackLayout>
-                            <Label Text="12 AM" Style="{StaticResource smallewhite}"/>
-                            <Image Source="moonmidrain.png"   Aspect="AspectFit" />
-                            <Label Text="30 %" Style="{StaticResource smalleBlue}"/>
-                            <Label Text="19°" Style="{StaticResource subtitlewhite}"/>
-                        </VerticalStackLayout>
+                        <DataTemplate x:DataType="model:Forecastday">
+                                 
+                                    <components:ForcastItem/>
+                                 
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
 
+                    </CollectionView>
+                
+
+                <BoxView HeightRequest="40" BackgroundColor="Transparent"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Column="0"
+           Padding="10"
+           BackgroundColor="{StaticResource Primary}"
+           BorderColor="{StaticResource Secondary}"
+           CornerRadius="20"
+           HasShadow="True">
+                        <VerticalStackLayout>
+                            <Label Text="􀆲 SUNRISE" Style="{StaticResource subtitle}"/>
+                            <BoxView Color="{StaticResource Secondary}" HeightRequest="2"/>
+                            <Label    Text="{Binding Allforcast.forecast.forecastday[0].day.avgtemp_c,StringFormat='{0}°'}" Style="{StaticResource smallewhite}"/>
+                        </VerticalStackLayout>
                     </Frame>
-                </HorizontalStackLayout>
+
+                    <Frame Grid.Column="2"
+           Padding="10"
+           BackgroundColor="{StaticResource Primary}"
+           BorderColor="{StaticResource Secondary}"
+           CornerRadius="20"
+           HasShadow="True">
+                        <VerticalStackLayout>
+                            <Label Text="􀆲 SUNRISE"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
             </VerticalStackLayout>
 
 

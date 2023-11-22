@@ -91,6 +91,9 @@
 	  <MauiXaml Update="Components\CityItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Components\ForcastItem.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Forecast.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

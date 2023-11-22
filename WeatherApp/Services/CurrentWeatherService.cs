@@ -12,6 +12,7 @@ using Condition = WeatherApp.Models.Condition;
 [assembly: Dependency(typeof(CurrentWeatherService))]
 namespace WeatherApp.Services
 {
+
     public class CurrentWeatherService : ICurrentWeather
     {
         SQLiteAsyncConnection db;
@@ -51,21 +52,23 @@ namespace WeatherApp.Services
                 Console.WriteLine($"Error creating table: {ex.Message}");
             }
         }
-        public async Task AddCurrentWeather(CurrentWeather currentWeather)
+        public async Task<int> AddCurrentWeather(CurrentWeather currentWeather)
         {
             await Init();
            
 
             var id = await db.InsertAsync(currentWeather);
+            return id;
         }
 
-        public async Task<CurrentWeather> GetCurrentWeather(int id)
+        public async Task<CurrentWeather> GetCurrentWeather()
         {
             await Init();
 
+            
             var currentWeather = await db.Table<CurrentWeather>()
-                .FirstOrDefaultAsync(c => c.Id == id);
-
+   .OrderByDescending(c => c.Id)
+   .FirstOrDefaultAsync();
             return currentWeather;
         }
 
@@ -74,6 +77,64 @@ namespace WeatherApp.Services
             await Init();
 
             await db.DeleteAsync<CurrentWeather>(id);
+
         }
+
+        public async Task<int> AddCurrent(Current current)
+        {
+            await Init();
+
+
+            var id = await db.InsertAsync(current);
+            return id;
+        }
+
+        public async Task<int> AddLocation(Models.Location location)
+        {
+            await Init();
+
+
+            var id = await db.InsertAsync(location);
+            return id;
+        }
+
+        public async Task<int> AddCondition(Condition condition)
+        {
+            await Init();
+
+
+            var id = await db.InsertAsync(condition);
+            return id;
+        }
+
+        public async Task<Current> GetCurrent(int id)
+        {
+            await Init();
+
+            var current = await db.Table<Current>()
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            return current;
+        }
+
+        public async Task<Models.Location> GetLocation(int id)
+        {
+            await Init();
+            var location = await db.Table<Models.Location>()
+               .FirstOrDefaultAsync(c => c.Id == id);
+
+            return location;
+        }
+
+        public async Task<Condition> GetCondition(int id)
+        {
+            await Init();
+
+            var condition = await db.Table<Condition>()
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            return condition;
+        }
+ 
     }
 }

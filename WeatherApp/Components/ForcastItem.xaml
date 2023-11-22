@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Frame xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="WeatherApp.Components.ForcastItem" 
+       Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Secondary}"
+       BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
+
+    <Frame.Triggers>
+        <DataTrigger TargetType="Frame" Binding="{Binding date, Converter={StaticResource DateEqualityConverter}}">
+            <Setter Property="BackgroundColor" Value="{StaticResource Tertiary}" />
+        </DataTrigger>
+    </Frame.Triggers>
+
+    <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
+        <Label Grid.Row="0" Text="{Binding date}" Style="{StaticResource smallewhite}"/>
+        <Image Grid.Row="2" Source="moonmidrain.png" Aspect="AspectFit" />
+        <Label Grid.Row="4" Text="{Binding day.daily_chance_of_rain,StringFormat='{0} %'}" Style="{StaticResource smalleBlue}"/>
+        <Label Grid.Row="6" Text="{Binding day.avgtemp_c,StringFormat='{0}°'}" Style="{StaticResource smallewhite}"/>
+    </Grid>
+
+</Frame>
+
