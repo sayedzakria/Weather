@@ -5,16 +5,14 @@
              xmlns:viewmodels="clr-namespace:WeatherApp.ViewModels"
               Style="{StaticResource CustomPageStyle}"
               xmlns:components="clr-namespace:WeatherApp.Components"
-             xmlns:helper="clr-namespace:WeatherApp.Helper"
+           
              xmlns:model="clr-namespace:WeatherApp.Models" 
              >
     <ContentPage.BindingContext>
         <viewmodels:ForcastViewModel/>
     </ContentPage.BindingContext>
-    <ContentPage.Resources>
-        <helper:DateEqualityConverter x:Key="DateEqualityConverter" />
-    </ContentPage.Resources>
-    <Grid Padding="20" RowDefinitions="Auto,Auto,15,Auto">
+    
+    <Grid Padding="20" RowDefinitions="Auto,Auto,15,Auto,15,Auto">
 
 
         <Label Grid.Row="0" Text="{Binding Allforcast.location.Name}" Style="{StaticResource Headline}" />
@@ -64,43 +62,58 @@
                 
 
                 <BoxView HeightRequest="40" BackgroundColor="Transparent"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="5" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Frame Grid.Column="0"
-           Padding="10"
-           BackgroundColor="{StaticResource Primary}"
-           BorderColor="{StaticResource Secondary}"
-           CornerRadius="20"
-           HasShadow="True">
-                        <VerticalStackLayout>
-                            <Label Text="􀆲 SUNRISE" Style="{StaticResource subtitle}"/>
-                            <BoxView Color="{StaticResource Secondary}" HeightRequest="2"/>
-                            <Label    Text="{Binding Allforcast.forecast.forecastday[0].day.avgtemp_c,StringFormat='{0}°'}" Style="{StaticResource smallewhite}"/>
-                        </VerticalStackLayout>
-                    </Frame>
-
-                    <Frame Grid.Column="2"
-           Padding="10"
-           BackgroundColor="{StaticResource Primary}"
-           BorderColor="{StaticResource Secondary}"
-           CornerRadius="20"
-           HasShadow="True">
-                        <VerticalStackLayout>
-                            <Label Text="􀆲 SUNRISE"/>
-                        </VerticalStackLayout>
-                    </Frame>
-                </Grid>
+                
 
             </VerticalStackLayout>
 
 
         </Frame>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
+            <Frame Grid.Column="0" 
+Padding="10"
+BackgroundColor="{StaticResource Primary}"
+BorderColor="{StaticResource Secondary}"
+CornerRadius="20"
+HasShadow="True">
+                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto">
+                    <Image   Source="sunrise.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>
+                    <VerticalStackLayout>
+                        <Label Margin="5" HorizontalOptions="Start" Text="SUNRISE" Style="{StaticResource subtitle}"/>
+
+                        <BoxView Color="{StaticResource Secondary}" HeightRequest="2"/>
+                        <Label Margin="5,15,5,65"   Text="{Binding Allforcast.forecast.forecastday[0].astro.sunrise}" Style="{StaticResource subtitlewhite}"/>
+                        
+                        <Label    Text="{Binding Allforcast.forecast.forecastday[0].astro.sunset,StringFormat='Sunset: {0}'}" Style="{StaticResource subtitlesmall}"/>
+                    </VerticalStackLayout>
+                </Grid>
+               
+            </Frame>
+
+            <Frame Grid.Column="2"
+Padding="10"
+BackgroundColor="{StaticResource Primary}"
+BorderColor="{StaticResource Secondary}"
+CornerRadius="20"
+HasShadow="True">
+                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto">
+                    <Image   Source="sunrise.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>
+                    <VerticalStackLayout>
+                        <Label Margin="5" HorizontalOptions="Start" Text="MoonRISE" Style="{StaticResource subtitle}"/>
+
+                        <BoxView Color="{StaticResource Secondary}" HeightRequest="2"/>
+                        <Label Margin="5,15,5,65"   Text="{Binding Allforcast.forecast.forecastday[0].astro.moonrise}" Style="{StaticResource subtitlewhite}"/>
+
+                        <Label    Text="{Binding Allforcast.forecast.forecastday[0].astro.moonset,StringFormat='Moonset: {0}'}" Style="{StaticResource subtitlesmall}"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+        </Grid>
     </Grid>
 
 </ContentPage>

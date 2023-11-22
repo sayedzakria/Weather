@@ -4,15 +4,14 @@
              x:Class="WeatherApp.Views.Home"
              xmlns:components="clr-namespace:WeatherApp.Components"
               xmlns:viewmodels="clr-namespace:WeatherApp.ViewModels"
+              xmlns:model="clr-namespace:WeatherApp.Models"
             Style="{StaticResource CustomPageStyle}"
                
              >
     <ContentPage.BindingContext>
         <viewmodels:HomeViewModel/>
     </ContentPage.BindingContext>
-    <ContentPage.Resources>
-        <viewmodels:ForcastViewModel x:Key="ForcastVM "/>
-    </ContentPage.Resources>
+    
     <Grid>
         
         <VerticalStackLayout Margin="20">
@@ -28,7 +27,7 @@
 Padding="10"
 BackgroundColor="{StaticResource Primary}"
         BorderColor="{StaticResource Secondary}"
-        CornerRadius="20"
+        CornerRadius="20" 
 HasShadow="True"
 HorizontalOptions="FillAndExpand"
 VerticalOptions="EndAndExpand">
@@ -44,7 +43,7 @@ HorizontalOptions="FillAndExpand"
 VerticalOptions="CenterAndExpand"/>
                 <BoxView HeightRequest="10" BackgroundColor="Transparent"/>
 
-                <CollectionView ItemsSource="{Binding Allforcast.forecast.forecastday,Source={StaticResource ForcastVM }}"  
+                <CollectionView ItemsSource="{Binding Allforcast.forecast.forecastday   }"  
        
           BackgroundColor="Transparent"
           ItemsLayout="HorizontalList"

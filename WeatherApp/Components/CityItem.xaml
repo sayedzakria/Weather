@@ -7,7 +7,11 @@
      <Image Source="rectangle.png" Aspect="AspectFill" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
             <Image Source="moonclod.png" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Aspect="AspectFit" HorizontalOptions="End" VerticalOptions="Start"/>
             <Label Margin="10,0,0,0" Text="19°" Style="{StaticResource temperature}" Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" />
-            <Label Margin="10,0,0,0" Text="H:24° L:18° " Style="{StaticResource subtitle}" Grid.Column="0" Grid.Row="1" HorizontalOptions="Start" />
+    <HorizontalStackLayout Grid.Column="0" Grid.Row="1">
+        <Label Margin="10,0,0,0" Text="{Binding Region} " Style="{StaticResource subtitle}"  HorizontalOptions="Start" />
+        <Label Margin="10,0,0,0" Text="{Binding Country,StringFormat=',{0}'} " Style="{StaticResource subtitle}"   HorizontalOptions="Start" />
+
+    </HorizontalStackLayout>
     <Label Margin="10,0,0,10" Text="{Binding Name}" Style="{StaticResource subtitlewhite}" Grid.Column="0" Grid.Row="2"  HorizontalOptions="Start"/>
         
 </Grid>

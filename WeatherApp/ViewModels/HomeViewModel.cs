@@ -23,6 +23,13 @@ namespace WeatherApp.ViewModels
         IInternetWeather internetWeatherService;
 
         Models.Location selectedCity;
+
+        AllForcast allForcast;
+        public AllForcast Allforcast
+        {
+            get => allForcast;
+            set => SetProperty(ref allForcast, value);
+        }
         public Models.Location SelectedCity
         {
             get => selectedCity;
@@ -87,6 +94,16 @@ namespace WeatherApp.ViewModels
 
                 await currentWeatherService.AddCurrentWeather(CurrentWeather);
                 Preferences.Set("LastUpdate", DateTime.Now);
+            }
+            Allforcast = await internetWeatherService.GetForcastWeather(city, "5");
+            foreach (var item in Allforcast.forecast.forecastday)
+            {
+                DateTime itemdate = DateTime.Parse(item.date);
+                if(itemdate.Date==DateTime.Now.Date)
+                {
+                    item.day.BGColor = Color.FromHex("#2B0B98");
+                    OnPropertyChanged();
+                }
             }
         }
     }

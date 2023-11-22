@@ -211,6 +211,13 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
+    <Style TargetType="Label" x:Key="subtitlesmall">
+        <Setter Property="FontFamily" Value="SfprodisplatBold"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Black}}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
     <Style TargetType="Label" x:Key="smallewhite">
         <Setter Property="FontFamily" Value="SfprodisplatRegular"/>
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />

@@ -28,5 +28,6 @@ namespace WeatherApp.Models
         public double daily_chance_of_snow { get; set; }
         public Condition condition { get; set; }
         public double uv { get; set; }
+        public Color BGColor { get; set; } = Color.FromHex("#696589");
     }
 }

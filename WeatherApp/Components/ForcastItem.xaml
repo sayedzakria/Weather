@@ -2,14 +2,10 @@
 <Frame xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        x:Class="WeatherApp.Components.ForcastItem" 
-       Margin="10" Padding="10,15,10,15" BackgroundColor="{StaticResource Secondary}"
+       Margin="10" Padding="10,15,10,15" BackgroundColor="{Binding day.BGColor}"
        BorderColor="{StaticResource PrimaryDark}" WidthRequest="60" CornerRadius="25">
 
-    <Frame.Triggers>
-        <DataTrigger TargetType="Frame" Binding="{Binding date, Converter={StaticResource DateEqualityConverter}}">
-            <Setter Property="BackgroundColor" Value="{StaticResource Tertiary}" />
-        </DataTrigger>
-    </Frame.Triggers>
+   
 
     <Grid RowDefinitions="Auto,5,Auto,5,Auto,5,Auto">
         <Label Grid.Row="0" Text="{Binding date}" Style="{StaticResource smallewhite}"/>

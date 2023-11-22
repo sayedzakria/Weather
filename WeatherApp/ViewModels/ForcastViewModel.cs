@@ -28,6 +28,15 @@ namespace WeatherApp.ViewModels
         {
             string city = Preferences.Get(nameof(city), "tanta");
             Allforcast = await internetWeatherService.GetForcastWeather(city, "5");
+            foreach (var item in Allforcast.forecast.forecastday)
+            {
+                DateTime itemdate = DateTime.Parse(item.date);
+                if (itemdate.Date == DateTime.Now.Date)
+                {
+                    item.day.BGColor = Color.FromHex("#2B0B98");
+                    OnPropertyChanged();
+                }
+            }
         }
     }
 }
